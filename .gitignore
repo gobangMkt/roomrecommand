@@ -1,0 +1,6 @@
+node_modules/
+.next/
+.env.local
+0.host/node_modules/
+0.host/.next/
+0.host/.env.local

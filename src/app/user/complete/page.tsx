@@ -14,10 +14,9 @@ export default function CompletePage() {
   }, [])
 
   const p = request?.period
-  const recLabel = p?.recUndecided ? '아직 정하지 않았어요'
-    : (p?.recStart && p?.recEnd) ? `${p.recStart} – ${p.recEnd}` : '—'
+  const recLabel = (p?.recStart && p?.recEnd) ? `${p.recStart} ~ ${p.recEnd}` : '—'
   const moveInLabel = p?.moveInUndecided ? '아직 정하지 않았어요'
-    : (p?.moveInStart && p?.moveInEnd) ? `${p.moveInStart} – ${p.moveInEnd}` : '—'
+    : (p?.moveInStart && p?.moveInEnd) ? `${p.moveInStart} ~ ${p.moveInEnd}` : '—'
 
   const rows = request ? [
     ['방추천 기간', recLabel],
@@ -30,74 +29,70 @@ export default function CompletePage() {
   ] : []
 
   return (
-    <main style={{ minHeight: '100svh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', padding: '0 24px' }}>
-      <div style={{ flex: 1, maxWidth: 480, width: '100%', margin: '0 auto', paddingTop: 64 }}>
+    <main style={{ background: '#F2F4F6', maxWidth: 480, margin: '0 auto' }}>
 
-        {/* 성공 아이콘 */}
+      {/* 완료 헤더 */}
+      <div style={{ background: '#fff', padding: '32px 20px 24px' }}>
         <div style={{
-          width: 64, height: 64, borderRadius: '50%',
-          background: 'rgba(30,215,96,.15)',
-          border: '2px solid var(--green)',
+          display: 'inline-flex', alignItems: 'center',
+          background: '#E8FBF0', borderRadius: 6,
+          padding: '3px 10px', marginBottom: 16,
+        }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: '#00C73C', letterSpacing: '0.3px' }}>신청 완료</span>
+        </div>
+        <div style={{
+          width: 56, height: 56, borderRadius: '50%', background: '#EEF3FF',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 24, color: 'var(--green)', fontWeight: 700,
-          marginBottom: 24,
-        }}>✓</div>
-
-        <h1 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', lineHeight: 1.3, marginBottom: 8 }}>
+          fontSize: 24, marginBottom: 16,
+        }}>🏠</div>
+        <h1 style={{ fontSize: 22, fontWeight: 700, color: '#191F28', marginBottom: 6 }}>
           신청이 완료됐어요
         </h1>
-        <p style={{ fontSize: 14, color: 'var(--text-sub)', lineHeight: 1.6, marginBottom: 40 }}>
-          조건에 맞는 호스트가 직접 연락드릴 거예요.<br />
-          연락처를 확인하고 기다려주세요.
+        <p style={{ fontSize: 14, color: '#8B95A1', lineHeight: 1.6 }}>
+          조건에 맞는 호스트가 직접 연락드릴 거예요
         </p>
+      </div>
 
-        {request && (
-          <div style={{
-            background: 'var(--surface)', borderRadius: 8,
-            overflow: 'hidden', marginBottom: 16,
-            boxShadow: 'var(--shadow-medium)',
-          }}>
-            <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--elevated)' }}>
-              <p style={{
-                fontSize: 11, fontWeight: 700, color: 'var(--text-sub)',
-                letterSpacing: '1.5px', textTransform: 'uppercase',
-              }}>신청 내용</p>
-            </div>
+      {/* 신청 내용 요약 */}
+      {request && (
+        <div style={{ background: '#fff', marginTop: 8, padding: '20px' }}>
+          <p style={{ fontSize: 13, fontWeight: 600, color: '#8B95A1', letterSpacing: '0.3px', marginBottom: 14 }}>신청 내용</p>
+          <div style={{ border: '1.5px solid #E5E8EB', borderRadius: 10, overflow: 'hidden' }}>
             {rows.map(([label, value], i) => (
               <div key={label} style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '13px 18px',
-                borderBottom: i < rows.length - 1 ? '1px solid var(--elevated)' : 'none',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+                padding: '13px 16px',
+                borderBottom: i < rows.length - 1 ? '1px solid #E5E8EB' : 'none',
               }}>
-                <span style={{ fontSize: 13, color: 'var(--text-sub)', flexShrink: 0 }}>{label}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', textAlign: 'right', maxWidth: '60%' }}>
+                <span style={{ fontSize: 13, color: '#8B95A1', minWidth: 70, flexShrink: 0 }}>{label}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#191F28', textAlign: 'right', maxWidth: '60%', wordBreak: 'break-all' }}>
                   {value}
                 </span>
               </div>
             ))}
           </div>
-        )}
+        </div>
+      )}
 
-        <div style={{
-          background: 'var(--elevated)', borderRadius: 8,
-          padding: '14px 16px', display: 'flex', gap: 10, marginBottom: 40,
-          border: '1px solid var(--border)',
-        }}>
-          <span style={{ color: 'var(--green)', fontSize: 15, flexShrink: 0 }}>💡</span>
-          <p style={{ fontSize: 13, color: 'var(--text-sub)', lineHeight: 1.6 }}>
-            조건 변경이 필요하면 다시 방 추천 받기에서<br />
-            수정하기를 눌러 언제든 바꿀 수 있어요.
-          </p>
+      {/* 안내 */}
+      <div style={{ background: '#fff', marginTop: 8, padding: '16px 20px' }}>
+        <div style={{ background: '#F8FAFF', borderRadius: 10, border: '1.5px solid #D0E2FF', padding: '14px 16px' }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+            <span style={{ color: '#3182F6', fontWeight: 700, flexShrink: 0 }}>·</span>
+            <span style={{ fontSize: 14, color: '#4A5568', lineHeight: 1.6 }}>
+              조건 변경이 필요하면 다시 방 추천 받기에서 수정하기를 눌러 언제든 바꿀 수 있어요.
+            </span>
+          </div>
         </div>
       </div>
 
-      <div style={{ padding: '16px 0 40px', maxWidth: 480, width: '100%', margin: '0 auto' }}>
+      {/* CTA — 콘텐츠 바로 아래 */}
+      <div style={{ background: '#fff', marginTop: 8, padding: '16px 20px 32px' }}>
         <Link href="/" style={{ display: 'block' }}>
           <button style={{
-            width: '100%', height: 56, borderRadius: 9999,
-            background: 'var(--green)', color: '#000',
+            width: '100%', padding: '15px', borderRadius: 10,
+            background: '#3182F6', color: '#fff',
             fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer',
-            letterSpacing: '1.4px', textTransform: 'uppercase',
           }}>
             홈으로 돌아가기
           </button>

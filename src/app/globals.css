@@ -5,39 +5,55 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
 :root {
-  --bg:       #121212;
-  --surface:  #181818;
-  --elevated: #1f1f1f;
-  --card:     #252525;
-  --text:     #ffffff;
-  --text-sub: #b3b3b3;
-  --green:    #1ed760;
-  --green-dk: #1db954;
-  --border:   #4d4d4d;
-  --error:    #f3727f;
-  --shadow-heavy:  rgba(0,0,0,.5) 0px 8px 24px;
-  --shadow-medium: rgba(0,0,0,.3) 0px 8px 8px;
-  --inset: rgb(18,18,18) 0px 1px 0px, rgb(124,124,124) 0px 0px 0px 1px inset;
+  --bg:             #F2F4F6;
+  --surface:        #FFFFFF;
+  --elevated:       #F8FAFF;
+  --text:           #191F28;
+  --text-sub:       #8B95A1;
+  --text-body:      #4A5568;
+  --text-muted:     #B0B8C1;
+  --blue:           #3182F6;
+  --blue-hover:     #1B6CF2;
+  --blue-light:     #EEF3FF;
+  --blue-selected:  #F0F6FF;
+  --border:         #E5E8EB;
+  --border-blue:    #D0E2FF;
+  --header-border:  #F2F4F6;
+  --notice-bg:      #F8FAFF;
+  --error:          #F04452;
+  --error-bg:       #FFF0F2;
+  --success:        #00C73C;
+  --success-bg:     #E8FBF0;
+  --disabled-bg:    #E5E8EB;
+  --disabled-text:  #B0B8C1;
+  --cancel-bg:      #F2F4F6;
+  --cancel-text:    #4E5968;
 }
 
 * { box-sizing: border-box; padding: 0; margin: 0; -webkit-tap-highlight-color: transparent; }
 
-html, body {
+html {
+  background: var(--bg);
+}
+
+body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--green); color: #000; }
+::selection { background: var(--blue); color: #fff; }
 
-input::placeholder, textarea::placeholder { color: var(--text-sub); opacity: .6; }
+input::placeholder, textarea::placeholder { color: var(--text-muted); }
 
-input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.5); cursor: pointer; }
+input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.4; }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button { opacity: .4; }
 
-/* 스크롤바 */
-::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Chrome 비밀번호 저장/유출경고 방지: type=text 이지만 dots로 마스킹 */
+.pw-mask { -webkit-text-security: disc; }
